@@ -1,0 +1,1 @@
+json.array! @organic_links, partial: 'organic_links/organic_link', as: :organic_link

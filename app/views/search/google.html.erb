@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+<div class="input-group search_box"  style="width:800px; margin:0 auto;">
+  <%= form_tag(google_search_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :q, params[:q], placeholder: "Search......", class: 'form-control' %>
+    <span class="input-group-btn">
+      <%= submit_tag "Search", class: 'btn btn-default' %>
+    </span>
+  <% end %>
+</div>

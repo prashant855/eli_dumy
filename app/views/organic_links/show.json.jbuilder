@@ -1,0 +1,1 @@
+json.partial! "organic_links/organic_link", organic_link: @organic_link
