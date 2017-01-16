@@ -4,13 +4,15 @@ class SearchController < ApplicationController
 	end
 
 	def google_search
-		data = response_values
-		if data['items'].present?
+	
+		google_search_api = GoogleCustomeSearch.new(params[:q])
+		data = google_search_api.response_data
+
+		if data && data['items'].present?
 			@arrays_of_links = data['items'].map{|i| i['link']}
 			
 			@arrays_of_links.each do |link|
-				OrganicLink.create(link: link,
-								   search: params[:q])
+				OrganicLink.create(link: link, search: params[:q])
 			end
 			
 			respond_to do |format|
@@ -22,17 +24,4 @@ class SearchController < ApplicationController
 	    	end
 	    end
 	end
-
-	private
-# Holding core and cxs values
-	def core_api
-		YAML.load_file("config/core_api.yml")
-	end
-# Get the response values of custome search api's
-	def response_values
-		core = core_api
-		response = HTTParty.get("https://www.googleapis.com/customsearch/v1?key=#{core["KEY"]}&cx=#{core["CX"]}&q=#{params[:q]}")
-		JSON.parse(response.body)
-	end 
-
 end 
