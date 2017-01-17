@@ -4,7 +4,7 @@ class OrganicLinksController < ApplicationController
   # GET /organic_links
   # GET /organic_links.json
   def index
-    @organic_links = OrganicLink.all
+    @organic_links = OrganicLink.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /organic_links/1

@@ -3,9 +3,17 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 <p id="notice"><%= notice %></p>
-<%= link_to t('.new_search', :default => t("helpers.links.new")),
-            root_path,
-            :class => 'btn btn-primary' %>
+<div class='row'>
+  <div class='span2'>
+  </div>
+  <div class='span8'>
+    <div class="span4">
+      <%= link_to t('.new_search', :default => t("helpers.links.new")), root_path, :class => 'btn btn-primary' %></div>
+    <div class="span8">
+      <%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -40,5 +48,4 @@
     <% end %>
   </tbody>
 </table>
-
 
